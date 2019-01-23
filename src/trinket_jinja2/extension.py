@@ -14,10 +14,9 @@ class Jinja2Extension:
         self.environment = Environment(
             loader=self.loader,
             enable_async=True,
-            filters=filters,
             autoescape=select_autoescape(['html', 'xml'])
         )
-        self.environment.filters['render_macro'] = render_macro
+        self.environment.filters = filters or {}
 
     def __getitem__(self, path: str):
         path = Path(path)
